@@ -4,35 +4,54 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="container grid gap-4 spacing-vertical">
-      <div className="md:flex items-center space-y-8 justify-evenly">
-        <Link href="/" className="flex items-center gap-2">
-          <Image
-            src={"/images/logo.png"}
-            alt="Nasr International School"
-            width={32}
-            height={32}
-          />
-          <span className="font-semibold whitespace-nowrap">
-            Nasr International School
-          </span>
-        </Link>
-        <div className="grid md:grid-cols-2 gap-8">
-          <p>
-            Survey No. 106/107, <br /> Serilingampally, Hyderabad, <br />{" "}
-            Telangana, India 500 019
-          </p>
+    <footer className="bg-foreground text-background py-8 md:py-12">
+      <div className="container px-4 sm:px-6 lg:px-8">
+        {/* Top Section: Logo and Contact Info */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {/* Logo Section */}
+          <div className="flex items-center gap-4">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/images/logo.png"
+                alt="Nasr International School"
+                width={40}
+                height={40}
+                priority
+              />
+              <span className="font-semibold text-xl">Nasr International School</span>
+            </Link>
+          </div>
+
+          {/* Address Section */}
           <div>
-            <p>Phone: +91 40 2303 1100</p>
-            <p>Email: nasr@gmail.com</p>
+            <p className="text-sm leading-relaxed">
+              Survey No. 106/107, <br />
+              Serilingampally, Hyderabad, <br />
+              Telangana, India 500 019
+            </p>
+          </div>
+
+          {/* Contact Info Section */}
+          <div>
+            <p className="text-sm leading-relaxed">
+              <strong>Phone:</strong> +91 40 2303 1100
+            </p>
+            <p className="text-sm leading-relaxed">
+              <strong>Email:</strong>{" "}
+              <a href="mailto:nasr@gmail.com" className="underline">
+                nasr@gmail.com
+              </a>
+            </p>
           </div>
         </div>
-      </div>
-      <div className="spacing-vertical">
-        <p className="text-center text-sm">
-          &copy; {new Date().getFullYear()} Nasr International School. All
-          rights reserved.
-        </p>
+
+        {/* Bottom Section: Copyright */}
+        <div className="mt-8 text-center">
+          <p className="text-sm text-secondary/50">
+            &copy; {new Date().getFullYear()} Nasr International School. All
+            rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

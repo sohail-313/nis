@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 
 const navItems = [
-  { label: "About us", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Academics", href: "/academics" },
   { label: "Admissions", href: "/admissions" },
   { label: "Contact", href: "/contact" },
@@ -29,25 +29,30 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full navBackground navAnimation">
+    <nav className="sticky top-0 z-50 w-full bg-background shadow-md">
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link href="/" className="text-xl font-bold">
+          {/* Logo */}
+          <Link href="/" className="text-xl font-bold text-primary" aria-label="Home">
             Nasr International School
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                className="hover:text-primary transition-colors"
-                onClick={handleLinkClick}
-              >
-                {item.label}
-              </Link>
-            ))}
+            <ul className="flex items-center space-x-8">
+              {navItems.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="hover:text-primary transition-colors"
+                    onClick={handleLinkClick}
+                    aria-label={item.label}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
             <ModeToggle />
           </div>
 
@@ -57,8 +62,9 @@ export default function Navbar() {
               variant="outline"
               onClick={toggleMobileMenu}
               aria-expanded={isMobileMenuOpen ? "true" : "false"}
+              aria-label="Toggle navigation menu"
             >
-              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <Menu size={24} />
             </Button>
           </div>
         </div>
@@ -66,20 +72,42 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed inset-y-0 left-0 w-64 transform transition-transform duration-300 ease-in-out
-          ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"} md:hidden z-50 pt-16`}
+        className={`fixed inset-0 md:hidden z-50 transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+        aria-hidden={!isMobileMenuOpen}
       >
-        <div className="flex flex-col space-y-4 px-6 py-4 bg-background">
-          {navItems.map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
-              className="text-gray-600 hover:text-gray-900 transition-colors"
-              onClick={handleLinkClick}
-            >
-              {item.label}
-            </Link>
-          ))}
+        <div className="relative flex flex-col items-start px-6 py-4 bg-background h-full w-full">
+          {/* Close Button */}
+          <Button
+            variant="outline"
+            className="ml-auto"
+            onClick={toggleMobileMenu}
+            aria-label="Close navigation menu"
+          >
+            <X size={24} />
+          </Button>
+
+          {/* Navigation Links */}
+          <ul className="flex flex-col space-y-6 w-full">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                <Link
+                  href={item.href}
+                  className="block hover:text-primary transition-colors"
+                  onClick={handleLinkClick}
+                  aria-label={item.label}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Optional: Add ModeToggle if needed in mobile */}
+          <div className="mt-auto">
+            <ModeToggle />
+          </div>
         </div>
       </div>
     </nav>

@@ -4,9 +4,10 @@ import { Button } from "../ui/button";
 
 export default function Hero() {
   return (
-    <div className="flex items-center opacity-0 animate-fade-in [--animation-delay:400ms] spacing-vertical">
+    <div className="flex items-center opacity-0 animate-fade-in [--animation-delay:400ms] py-12 sm:py-16 lg:py-20">
       <div className="container px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column: Text */}
           <div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
               Welcome to Nasr International School
@@ -21,11 +22,14 @@ export default function Hero() {
             </Button>
           </div>
 
-          <div className="relative w-full h-[400px] sm:h-[500px] lg:h-[600px]">
+          {/* Right Column: Image */}
+          <div className="relative w-full aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
             <Image
               src="/images/nasr-school.jpg"
               alt="Nasr International School"
-              layout="fill"
+              width={1200}
+              height={675}
+              layout="responsive"
               className="object-cover"
               priority
             />
